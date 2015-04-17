@@ -1,0 +1,73 @@
+USER
+	id
+	username
+	password
+
+	CRUD User
+	CheckPassword
+
+WINE
+	id
+	name
+	vineyard
+	country
+	varietal_id
+	description
+
+	CRUD Wine
+	CRUD Review
+	Approve Review
+	CRUD Image
+	Approve Image
+	Most Recent Wine
+
+VARIETAL
+	id
+	name
+	isBlend
+	type
+
+	CRUD Varietal
+	CRUD Blend
+
+STORE
+	id
+	name
+	location
+
+	CRUD Store
+
+WINE_STORE
+	id
+	wine_id
+	store_id
+	price
+
+REVIEW
+	id
+	user_id
+	wine_id
+	isFavourite
+	year			null
+	rating			null
+	description		null
+	date			
+	store_id
+	isApproved
+
+IMAGE
+	id
+	user_id
+	wine_id
+	url
+	timestamp
+
+TAG
+	id
+	name
+
+WINE_TAG
+	id
+	tag_id
+	wine_id
+	count

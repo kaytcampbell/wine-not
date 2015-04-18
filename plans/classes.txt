@@ -8,7 +8,7 @@ USER
 
 WINE
 	id
-	name
+	label
 	vineyard
 	country
 	varietal_id

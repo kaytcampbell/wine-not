@@ -6,6 +6,10 @@
 			templateUrl: "pages/wines.html",
 			controller: "WinesController"
 		})
+		.when('/wines/:id', {
+			templateUrl: "pages/wine.html",
+			controller: "WineController"
+		})
 		.when('/', {
 			templateUrl: 'pages/home.html'			
 		})
@@ -18,33 +22,14 @@
 		this.wines = winedb;
 	});
 
-	// app.controller("WineController", function() {
-	// 	this.wines = {};
+	app.controller("WineController", [ '$routeParams', function($routeParams) {
+		this.wine = winedb.filter(function(wine) {
+			return wine.id == $routeParams.id;
+		})[0];
+	}]);
 
-	// 	this.getAllWines = function() {
-	// 		this.wines = winedb;
-	// 	};
-
-	// 	this.selectWine = function(selectedWine) {
-	// 		this.wine = selectedWine;
-	// 	};
-
-	// 	this.newWine = function () {
-	// 		var newWine = {};
-	// 		this.wines.push(newWine);
-	// 	};
-	// });
-
-	// app.controller("ReviewController", function() {
-	// 	this.review = {};
-
-	// 	this.addReview = function(wine) {
-	// 		wine.reviews.push(this.review);
-	// 		this.review = {};
-	// 	}
-	// });
-
-	var winedb = [{
+	var winedb = [
+		{
 			id: '1',
 			label: "Proprietor's Reserve",
 			vineyard: "Jackson Trigg's",
@@ -112,7 +97,7 @@
 			id: '3',
 			label: "Proprietor's Reserve",
 			vineyard: "Beringer",
-			country: "California",
+			country: "United States - California",
 			varietal: "Cabernet Sauvignon",
 			description: "A nice heavy cab, perfect for steak or chocolate.",
 			reviews: [{

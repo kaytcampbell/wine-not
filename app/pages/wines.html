@@ -3,20 +3,11 @@
 	<!-- everything in this div gets repeated for each "wine" in the list of "wines" loaded from the controller -->
 	<div ng-repeat="wine in winesCtrl.wines">
 		<div>ID: {{wine.id}}</div> <!-- not useful info, just to see what's happening -->
-		<div>Label: {{wine.label}}</div>
 		<div>Vineyard: {{wine.vineyard}}</div>
+		<div>Label: {{wine.label}}</div>
 		<div>Varietal: {{wine.varietal}}</div>
 		<div>Country: {{wine.country}}</div>
 		<div>Description: {{wine.description}}</div>
-		<!-- everything in this div gets repeated for each "review" in the "reviews" for the particular "wine" -->
-		<div ng-repeat="review in wine.reviews">
-			<div>ID: {{review.id}}</div> <!-- not useful info, just to see what's happening -->
-			<div>Bottled Year: {{review.year}}</div>
-			<div>Rating: {{review.rating}}</div>
-			<div>Description: {{review.description}}</div>
-			<div>Date: {{review.date}}</div>
-			<div>Store Purchased: {{review.store}}</div>
-			<div>Price: {{review.price}}</div>
-		</div>
+		<a href="#/wines/{{wine.id}}">Click to see more about this wine</a>
 	</div>
 </div>

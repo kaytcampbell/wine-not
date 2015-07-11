@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="winenot">
+<head>
+	<meta charset="utf-8">
+	<title>Wine-Not</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+<body>
+	<div id="header">
+		<!-- make a nice pretty top of the page -->
+		<h1>Wine-Not</h1>
+	</div>
+	<div id="content">
+		<h2>Get ready for the content!</h2>
+		<!-- where angular puts the right template from /pages -->
+		<div ng-view></div>
+	</div>
+	<div id="footer">
+		<!-- make a nice pretty bottom of the page -->
+		<h3>This is the end!</h3>
+	</div>
+
+	<!-- vendor scripts -->
+	<script src="scripts/vendor/angular.min.js"></script>
+	<script src="scripts/vendor/angular-route.min.js"></script>
+
+	<!-- app scripts -->
+	<script src="scripts/app.js"></script>
+</body>
+</html>

@@ -4,29 +4,42 @@
 	<meta charset="utf-8">
 	<title>Wine-Not</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="css/foundation.css" />
+	<link rel="stylesheet" href="css/normalize.css" />
+	<link rel="stylesheet" href="css/base.css" />
+	<script src="//use.typekit.net/llq1jjf.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
-	<div id="header">
-		<!-- make a nice pretty top of the page -->
-		<h1>Wine-Not</h1>
-		<div id="nav">
-			<a href="#/">Home</a>
-			<a href="#/wines">Wines</a>
+	<div class="row">
+		<div id="header" class="large-12 columns">
+			<a href="index.html">
+				<img src="images/wine-not-logo.png" alt="Wine Not Logo" width="150" class="mt1 mb1 left">
+			</a>
+			<!-- make a nice pretty top of the page -->
+			<ul class="nav right">
+				<li><a href="#/">Home</a></li>
+				<li><a href="#/wines">Wines</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
 		</div>
 	</div>
-	<div id="content">
-		<h2>Get ready for the content!</h2>
-		<!-- where angular puts the right template from /pages -->
-		<div ng-view></div>
-	</div>
-	<div id="footer">
-		<!-- make a nice pretty bottom of the page -->
-		<h3>This is the end!</h3>
+	<div ng-view></div>
+	<div class="row">
+		<div id="footer" class="large-12 columns">
+			<!-- make a nice pretty bottom of the page -->
+		</div>
 	</div>
 
 	<!-- vendor scripts -->
 	<script src="scripts/vendor/angular.min.js"></script>
 	<script src="scripts/vendor/angular-route.min.js"></script>
+  <script src="scripts/vendor/jquery.js"></script>
+  <script src="scripts/vendor/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 
 	<!-- app scripts -->
 	<script src="scripts/app.js"></script>

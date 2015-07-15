@@ -1,0 +1,13 @@
+<div ng-controller="WinesController as winesCtrl">
+	<h1>Look at the wines!</h1>
+	<!-- everything in this div gets repeated for each "wine" in the list of "wines" loaded from the controller -->
+	<div ng-repeat="wine in winesCtrl.wines">
+		<div>ID: {{wine.id}}</div> <!-- not useful info, just to see what's happening -->
+		<div>Vineyard: {{wine.vineyard}}</div>
+		<div>Label: {{wine.label}}</div>
+		<div>Varietal: {{wine.varietal}}</div>
+		<div>Country: {{wine.country}}</div>
+		<div>Description: {{wine.description}}</div>
+		<a href="#/wines/{{wine.id}}">Click to see more about this wine</a>
+	</div>
+</div>

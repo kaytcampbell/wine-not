@@ -1,4 +1,8 @@
+DROP TABLE IF EXISTS review;
+DROP TABLE IF EXISTS wine;
+DROP TABLE IF EXISTS varietal;
 DROP TABLE IF EXISTS country;
+
 CREATE TABLE country
 (
 	name 		VARCHAR(25),
@@ -7,17 +11,16 @@ CREATE TABLE country
 	PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS varietal;
 CREATE TABLE varietal
 (
-	name 		VARCHAR(25),
+	name 		VARCHAR(100),
 	color		CHAR(1),
+	isBlend		BIT,
 
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS wine;
 CREATE TABLE wine
 (
 	vineyard		VARCHAR(100),
@@ -33,15 +36,14 @@ CREATE TABLE wine
 	PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS review;
 CREATE TABLE review
 (
-	username		VARCHAR(25),
 	wine_id			INT,
+	username		VARCHAR(25),
 	year			INT,
 	rating			INT,
 	description		VARCHAR(250),
-	timestamp		TIMESTAMP,
+	timestamp		TIMESTAMP DEFAULT CURRENT_TIMSTAMP,
 
 	FOREIGN KEY (wine_id) 	REFERENCES wine(id),
 

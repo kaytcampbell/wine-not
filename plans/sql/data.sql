@@ -207,4 +207,17 @@ INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES(
 INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES("Nicolas Feuillate", "", (SELECT id FROM varietal WHERE name LIKE "Rosé Brut" LIMIT 1), (SELECT id FROM country WHERE name LIKE "France" LIMIT 1), "");
 INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES("Veuve Clicquot", "Yellow Label", (SELECT id FROM varietal WHERE name LIKE "Brut" LIMIT 1), (SELECT id FROM country WHERE name LIKE "France" LIMIT 1), "");
 INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES("Dom Perignon", "", (SELECT id FROM varietal WHERE name LIKE "Brut" LIMIT 1), (SELECT id FROM country WHERE name LIKE "France" LIMIT 1), "");
+
+TRUNCATE TABLE review;
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Rand al'Thor", 2009, 4, "Blood dagger tunic never resting, none so wise, the last of the dragons feed it to the goats dog.");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Perrin Aybara", 2009, 3, "Honeyed locusts court arbor gold, treachery ours is the fury winter is coming princess none so dutiful.");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Matrim Cauthon", 2009, 2.5, "Slave royal milk of the poppy the seven velit esse full of terrors in his cups.");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Nynaeve al'Meara", 2011, 1, "Bloody mummers as high as honor, rouse me not pride and purpose we light the way brothel.");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Egwene al'Vere", 2011, 4, "None so fierce spearwife. Nulla gravida you know nothing. ");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Elayne Trakand", 2011, 3, "Duis sapien sem, aliquet nec, honeyed locusts, green dreams, bannerman. Smallfolk faucibus, crows old bear darkness");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Moiraine Damodred", 2014, 4, "Dungeon lord of light. Squire fermentum. None so dutiful the wall.");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Lan Mandragoran", 2014, 3, "Moon-flower juice suckling pig neeps. Your grace. Night's watch, never resting garrison dirk");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Thom Merrilin", 2014, 2, "A taste of glory mulled wine bastard. Our sun shines bright righteous in wrath. ");
+INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Elmindreda Farshaw", 2014, 1, "Darkness realm, dagger seven hells betrothed, est eros bibendum elit, trencher luctus magna beware our sting.");
+
 SET FOREIGN_KEY_CHECKS = 1;

@@ -18,14 +18,56 @@
 		});
 	});
 
-	app.controller("WinesController", function() {
-		this.wines = winedb;
-	});
+	app.controller("WinesController", [ '$http', function($http) {
+		var ctrl = this;
+		$http.get('data/wines.php')
+		.success (function (data, status, headers, config) {
+			/* DEBUG */ ctrl.response = {result: 'success', data: data, status: status, headers: headers, config: config};
+			ctrl.wines = data;
+		})
+		.error (function (data, status, headers, config) {
+			/* DEBUG */ ctrl.response = {result: 'error', data: data, status: status, headers: headers, config: config};
+			ctrl.error = 'Oops! Could not retrieve wines';
+		});
+	}]);
 
-	app.controller("WineController", [ '$routeParams', function($routeParams) {
-		this.wine = winedb.filter(function(wine) {
-			return wine.id == $routeParams.id;
-		})[0];
+	app.controller("WineController", [ '$http', '$routeParams', function($http, $routeParams) {
+		var ctrl = this;
+		$http.get('data/wine.php?id=' + $routeParams.id)
+		.success (function (data, status, headers, config) {
+			/* DEBUG */ ctrl.response = {result: 'success', data: data, status: status, headers: headers, config: config};
+			ctrl.wine = data;
+		})
+		.error (function (data, status, headers, config) {
+			/* DEBUG */ ctrl.response = {result: 'error', data: data, status: status, headers: headers, config: config};
+			ctrl.error = 'Oops! Could not retrieve wines';
+		});
+	}]);
+
+	app.controller("ReviewsController", [ '$http', '$routeParams', function($http, $routeParams) {
+		var ctrl = this;
+		$http.get('data/reviews.php?wine=' + $routeParams.id)
+		.success (function (data, status, headers, config) {
+			/* DEBUG */ ctrl.response = {result: 'success', data: data, status: status, headers: headers, config: config};
+			ctrl.reviews = data;
+		})
+		.error (function (data, status, headers, config) {
+			/* DEBUG */ ctrl.response = {result: 'error', data: data, status: status, headers: headers, config: config};
+			ctrl.error = 'Oops! Could not retrieve wines';
+		});
+	}]);
+
+	app.controller("VarietalController", ['$http', function($http) {
+		var ctrl = this;
+		$http.get('data/varietals.php')
+		.success (function (data, status, headers, config) {
+			/* DEBUG */ ctrl.response = {result: 'success', data: data, status: status, headers: headers, config: config};
+			ctrl.varietals = data;
+		})
+		.error (function (data, status, headers, config) {
+			/* DEBUG */ ctrl.response = {result: 'error', data: data, status: status, headers: headers, config: config};
+			ctrl.error = 'Oops! Could not retrieve varietals';
+		});
 	}]);
 
 	var winedb = [

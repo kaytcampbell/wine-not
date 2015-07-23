@@ -1,6 +1,10 @@
 SET FOREIGN_KEY_CHECKS = 0; 
-
+TRUNCATE TABLE review;
+TRUNCATE TABLE wine;
+TRUNCATE TABLE varietal;
 TRUNCATE TABLE country;
+SET FOREIGN_KEY_CHECKS = 1;
+
 INSERT INTO country (name) VALUES('France');
 INSERT INTO country (name) VALUES('Italy');
 INSERT INTO country (name) VALUES('Spain');
@@ -42,7 +46,6 @@ INSERT INTO country (name) VALUES('Slovenia');
 INSERT INTO country (name) VALUES('Tunisia');
 INSERT INTO country (name) VALUES('Uzbekistan');
 
-TRUNCATE TABLE varietal;
 INSERT INTO varietal (name, color, isBlend) VALUES("Brut", "C", 0);
 INSERT INTO varietal (name, color, isBlend) VALUES("Brut Cava", "C", 0);
 INSERT INTO varietal (name, color, isBlend) VALUES("Brut Prosecco", "C", 0);
@@ -99,7 +102,6 @@ INSERT INTO varietal (name, color, isBlend) VALUES("White Zinfandel", "W", 0);
 INSERT INTO varietal (name, color, isBlend) VALUES("Zinfandel", "R", 0);
 INSERT INTO varietal (name, color, isBlend) VALUES("Zinfandel, Cabernet, Syrah & Petite Sirah", "R", 1);
 
-TRUNCATE TABLE wine;
 INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES("Strike", "Jet", (SELECT id FROM varietal WHERE name LIKE "Shiraz, Cabernet, Zinfandel, Mataro" LIMIT 1), (SELECT id FROM country WHERE name LIKE "Australia" LIMIT 1), "");
 INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES("Domaine Bousquet", "Los Cuatro", (SELECT id FROM varietal WHERE name LIKE "Syrah, Malbec, Cabernet, Merlot" LIMIT 1), (SELECT id FROM country WHERE name LIKE "Argentina" LIMIT 1), "");
 INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES("J Lohr", "Home Ranch", (SELECT id FROM varietal WHERE name LIKE "Petit Verdot, Petite Sirah, Malbec, Merlot" LIMIT 1), (SELECT id FROM country WHERE name LIKE "United States" LIMIT 1), "");
@@ -208,7 +210,6 @@ INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES(
 INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES("Veuve Clicquot", "Yellow Label", (SELECT id FROM varietal WHERE name LIKE "Brut" LIMIT 1), (SELECT id FROM country WHERE name LIKE "France" LIMIT 1), "");
 INSERT INTO wine (vineyard, label, varietal_id, country_id, description) VALUES("Dom Perignon", "", (SELECT id FROM varietal WHERE name LIKE "Brut" LIMIT 1), (SELECT id FROM country WHERE name LIKE "France" LIMIT 1), "");
 
-TRUNCATE TABLE review;
 INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Rand al'Thor", 2009, 4, "Blood dagger tunic never resting, none so wise, the last of the dragons feed it to the goats dog.");
 INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Perrin Aybara", 2009, 3, "Honeyed locusts court arbor gold, treachery ours is the fury winter is coming princess none so dutiful.");
 INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Matrim Cauthon", 2009, 2.5, "Slave royal milk of the poppy the seven velit esse full of terrors in his cups.");
@@ -219,5 +220,3 @@ INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Moi
 INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Lan Mandragoran", 2014, 3, "Moon-flower juice suckling pig neeps. Your grace. Night's watch, never resting garrison dirk");
 INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Thom Merrilin", 2014, 2, "A taste of glory mulled wine bastard. Our sun shines bright righteous in wrath. ");
 INSERT INTO review (wine_id, username, year, rating, description) VALUES(1, "Elmindreda Farshaw", 2014, 1, "Darkness realm, dagger seven hells betrothed, est eros bibendum elit, trencher luctus magna beware our sting.");
-
-SET FOREIGN_KEY_CHECKS = 1;

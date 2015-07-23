@@ -1,6 +1,6 @@
 <?php
 	include 'db.php';
-	function getReviewsByWineId($db, $wine_id)
+	function selectByWineId($db, $wine_id)
 	{
 		$stmt = $db->prepare('SELECT id, username, year, rating, description, DATE_FORMAT(timestamp, "%Y-%m-%dT%H:%i:%s.0Z") FROM review WHERE wine_id = ? ORDER BY timestamp');
 		$stmt->bind_param('i', $wine_id);
@@ -8,6 +8,7 @@
 		$stmt->bind_result($id, $username, $year, $rating, $description, $timestamp);
 		while($stmt->fetch())
 		{
+			$review = new stdClass();
 			$review->id = $id;
 			$review->username = $username;
 			$review->year = $year;
@@ -18,62 +19,63 @@
 			$reviews[] = $review;
 		}
 		echo json_encode($reviews);
+		$stmt->free_result();
+		$stmt->close();
 	}
-	function addReview($db, $review)
+	function insert($db, $review)
 	{
 		$stmt = $db->prepare('INSERT INTO review (wine_id, username, year, rating, description) VALUES (?, ?, ?, ?, ?);');
 		$stmt->bind_param('isiis', $review->wine_id, $review->username, $review->year, $review->rating, $review->description);
 		$stmt->execute();
 		echo $stmt->insert_id;
+		$stmt->free_result();
+		$stmt->close();
 	}
-	function editReview($db, $review)
+	function update($db, $id, $review)
 	{
 		$stmt = $db->prepare('UPDATE review SET wine_id = ?, username = ?, year = ?, rating = ?, description = ? WHERE id = ? LIMIT 1;');
-		$stmt->bind_param('isiisi', $review->wine_id, $review->username, $review->year, $review->rating, $review->description, $review->id);
+		$stmt->bind_param('isiisi', $review->wine_id, $review->username, $review->year, $review->rating, $review->description, $id);
 		$stmt->execute();
 		echo $stmt->affected_rows;
+		$stmt->free_result();
+		$stmt->close();
 	}
-	function deleteReview($db, $id)
+	function delete($db, $id)
 	{
 		$stmt = $db->prepare('DELETE FROM review WHERE id = ? LIMIT 1;');
 		$stmt->bind_param('i', $id);
 		$stmt->execute();
 		echo $stmt->affected_rows;
+		$stmt->free_result();
+		$stmt->close();
 	}
-
-	// echo '<h1>TESTING</h1>';
-	// $review->wine_id = 1;
-	// $review->username = "Bob";
-	// $review->year = 1999;
-	// $review->rating = 5;
-	// $review->description = "Edited for your pleasure.";
-	// $review->id = 11;
-	// echo 'Review:<pre>'; print_r($review); echo '</pre>'; 
-	// addReview($db, $review);
-	// editReview($db, $review);
-	// deleteReview($db, $review->id);
 
 	try
 	{
 		switch($_SERVER['REQUEST_METHOD'])
 		{
 			case 'GET':
-				if(isset($_GET['wine']) && is_numeric($_GET['wine']))
+				if(isset($_GET['wine']))
 				{
-					getReviewsByWineId($db, $_GET['wine']);
+					selectByWineId($db, $_GET['wine']);
 				}
 				break;
 			case 'POST':
-				$review = json_decode(file_get_contents("php://input"));
-				addReview($db, $review);
+				$data = json_decode(file_get_contents("php://input"));
+				insert($db, $data);
 				break;
 			case 'PUT':
-				$review = json_decode(file_get_contents("php://input"));
-				editReviews($db, $review);
+				if(isset($_GET['id']))
+				{
+					$data = json_decode(file_get_contents("php://input"));
+					update($db, $data);
+				}
 				break;
 			case 'DELETE':
-				$review = json_decode(file_get_contents("php://input"));
-				deleteReview($db, $review->id);
+				if(isset($_GET['id']))
+				{
+					delete($db, $data->id);
+				}
 				break;
 		}
 		$db->close();

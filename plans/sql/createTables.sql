@@ -43,7 +43,7 @@ CREATE TABLE review
 	year			INT,
 	rating			INT,
 	description		VARCHAR(250),
-	timestamp		TIMESTAMP DEFAULT CURRENT_TIMSTAMP,
+	timestamp		TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
 	FOREIGN KEY (wine_id) 	REFERENCES wine(id),
 
